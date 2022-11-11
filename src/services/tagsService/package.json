@@ -1,0 +1,32 @@
+{
+  "name": "tags-service",
+  "version": "0.0.1",
+  "description": "Leetcode Roulette service to retrieve tags and display tags from https://leetcode.com.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --passWithNoTests"
+  },
+  "keywords": [
+    "Tags",
+    "Service",
+    "Tags",
+    "Service",
+    "Leetcode",
+    "Leetcode",
+    "Roulette",
+    "Microservices",
+    "Microservice",
+    "Architecture"
+  ],
+  "author": "Eric Hicks",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.2",
+    "mongodb": "^4.11.0",
+    "mongoose": "^6.7.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14"
+  }
+}
