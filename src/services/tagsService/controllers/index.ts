@@ -2,7 +2,16 @@ import { Request, Response } from "express";
 import { Tags, ITag } from "../models/tags";
 import { Query } from "./interfaces/query";
 
+/**
+ * `TagsController` class for all tag related business logic.
+ */
 export default class TagsController {
+
+	/**
+	 * Retrieves all tags stored in the `tags` collection
+	 * @param req - Express Request object
+	 * @param res - Express Response object
+	 */
 	public static async getAllTags(req: Request<unknown, unknown, unknown, Query>, res: Response) {
 		const limit = req.query.limit;
 		const page = req.query.page;
