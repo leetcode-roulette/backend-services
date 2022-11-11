@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse, CreateAxiosDefaults } from "axios";
+import axios, { AxiosInstance, AxiosResponse, CreateAxiosDefaults as LeetcodeAPIConfig } from "axios";
 import { iLeetcodeAPI, QuestionData } from ".";
 
 // Interfaces mathcing leetcodes provided schema at https://leetcode.com/api/problems/all
@@ -23,7 +23,7 @@ export default class LeetcodeAPI implements iLeetcodeAPI {
 	 * 
 	 * @param config - Axios config data for api request
 	 */
-	constructor(config?: CreateAxiosDefaults) {
+	constructor(config?: LeetcodeAPIConfig) {
 		this.api = axios.create({
 			...config,
 			baseURL: "https://leetcode.com/"
