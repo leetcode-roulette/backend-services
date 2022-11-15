@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Tags, ITag } from "../models/tags";
+import { Tags, iTag } from "../models/tags";
 import { Query } from "./interfaces/query";
 
 /**
@@ -12,18 +12,18 @@ export default class TagsController {
 	 * @param req - Express Request object
 	 * @param res - Express Response object
 	 */
-	public static async getAllTags(req: Request<unknown, unknown, unknown, Query>, res: Response) {
+	public static async getAllTags(req: Request<unknown, unknown, unknown, Query>, res: Response): Promise<Response> {
 		const limit = req.query.limit;
 		const page = req.query.page;
 
 		try {
-			const data: Array<ITag> = await Tags.find()
+			const data: Array<iTag> = await Tags.find()
 				.limit(limit)
 				.sort(TagsController.getParsedSortString(req.query.sort));
 			const total: number = await Tags.countDocuments();
 			const totalPages: number = Math.ceil(total / limit) || 1;
 
-			res.status(200).json({
+			return res.status(200).json({
 				message: "Successfully retrieved tags",
 				tags: TagsController.getParsedTagData(data),
 				paging: {
@@ -33,17 +33,17 @@ export default class TagsController {
 				}
 			});
 		} catch(e) {
-			res.status(500).json({
+			return res.status(500).json({
 				message: "Unexpected error caught retrieving tags",
 				error: e
 			});
 		}
 	}
 
-	private static getParsedTagData(tags: Array<ITag>): Array<object> {
+	private static getParsedTagData(tags: Array<iTag>): Array<object> {
 		return tags.map(tag => ({
 			name: tag.name,
-			tag_slug: tag.tagSlug,
+			slug: tag.slug,
 			number_of_problems: tag.numberOfProblems
 		}));
 	}
