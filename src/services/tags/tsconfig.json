@@ -1,3 +1,24 @@
 {
-  "extends": "../../../tsconfig.json"
+	"compilerOptions": {
+		"strict": true,
+		"declaration": true,
+		"checkJs": true,
+		"allowJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"declarationMap": true,
+		"paths": {
+			"@models/*": ["models/*"],
+			"@controllers/*": ["controllers/*"],
+			"@routes/*": ["routes/*"]
+		},
+		"baseUrl": "./src",
+		"outDir": "dist",
+		"target": "ES2022",
+		"module": "CommonJS",
+		"noImplicitAny": true,
+    "resolveJsonModule": true
+	},
+	"include": ["./src"],
+	"exclude": ["node_modules"]
 }

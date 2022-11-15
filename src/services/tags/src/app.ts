@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
-import router from "./routes";
+import router from "./routes/tags";
 import { config } from "dotenv";
 
 config();

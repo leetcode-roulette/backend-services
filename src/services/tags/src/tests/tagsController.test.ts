@@ -1,6 +1,6 @@
 import supertest from "supertest";
 import { app } from "../app";
-import { Tags, iTag } from "../models/tags";
+import { Tags, iTag } from "@models/tags";
 import mongoose from "mongoose";
 
 beforeEach((done) => {
