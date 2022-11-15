@@ -19,7 +19,7 @@ export default class TagsController {
 		try {
 			const data: Array<iTag> = await Tags.find()
 				.limit(limit)
-				.sort(TagsController.getParsedSortString(req.query.sort));
+				.sort("-" + TagsController.getParsedSortString(req.query.sort));
 			const total: number = await Tags.countDocuments();
 			const totalPages: number = Math.ceil(total / limit) || 1;
 
@@ -49,12 +49,12 @@ export default class TagsController {
 	}
 
 	private static getParsedSortString(sortString: string): string {
-		const validSortStrings: Set<string> = new Set(["tagSlug", "name", "numberOfProblems"]);
+		const validSortStrings: Set<string> = new Set(["-tagSlug", "-name", "-numberOfProblems"]);
 
-		if (validSortStrings.has(sortString)) {
+		if (validSortStrings.has(sortString) || validSortStrings.has("-" + sortString)) {
 			return sortString;
 		}
 
-		return "numberOfProblems";
+		return "-numberOfProblems";
 	}
 }
