@@ -1,17 +1,14 @@
-# Tags Scraper
-[Leetcode Roulette](https://leetcoderoulette.com) service that runs scheduled jobs to get [Leetcode](https://leetcode.com) tag data.
+# Tags Service
+Tags endpoints used for [Leetcode Roulette](https://leetcoderoulette.com).
+
+> API hosted at https://api.leetcoderoulette.com
 
 ## Getting Started
-To get started running the Tag Scraper service locally, clone the repository to your local machine and change to the project root directory. Next, make sure to make the needed configurations and run `npm install` to get the needed packages for the project. Next, build and run the project with `npm run build` followed by `npm start` respectively.
+To get started running the Tags Service locally, clone the repository to your local machine and change to the project root directory. Next, make sure to make the needed configurations and run `npm install` to get the needed packages for the project. Next, build and run the project with `npm run build` followed by `npm start` respectively.
 
 ```
 git clone https://github.com/leetcode-roulette/backend-services.git
-cd backend-services/src/services/tagsScraper
-```
-
-This will add the project to a new `backend-services` directory and change into the directory.
-
-```
+cd backend-services/src/services/tags
 npm install
 npm run build
 npm start
@@ -19,11 +16,20 @@ npm start
 
 This will install the required dependencies on your local machine followed by building the source code to a `dist` folder and running the server code in the `dist/index.js` file.
 
+
 ### Prerequisites
-Before running the Tags Scraper service locally, the following steps will need to be taken to ensure the needed software will be installed or set up.
+Before running the Tags Service locally, the following steps will need to be taken to ensure the needed software will be installed or set up.
 
 * Install [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and [NodeJS](https://nodejs.dev/en/learn/how-to-install-nodejs/)
+* Install [MongoDB](https://www.mongodb.com/docs/manual/installation/) or [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/try4) and setup using the provided [instructions](https://www.mongodb.com/docs/atlas/getting-started/)
 * Install and setup [Kafka](https://kafka.apache.org/quickstart)
+* Follow the instructions in the [leetcode-roulette/backend-services/src/services/tagsScraper](https://github.com/leetcode-roulette/backend-services/src/services/tagsScraper) service to populate the database with the needed resources.
+
+### Initial Configuration
+Before starting, you'll need to configure the mongoose database connection string. This can be done by creating a `.env` file in the root directory of the project. In the `.env` file, be sure to specify a connection string named `MONGO_CONNECTION_STRING`.
+
+#### Examples:
+* ***MONGO_CONNECTION_STRING***: "mongodb://localhost:27017/myDB"
 
 ## Developing
 To begin development on this project, make sure to make the needed configurations and run `npm install` to get the needed packages for the project. Finally, run the `npm run dev` command to deploy a local development environment on your local machine.
@@ -57,10 +63,20 @@ This will run the tests in any file in the `src` directory following the specifi
 * `"**/tests/**/*.test.ts"`
 
 ## Features
-This project sets up a cron job to scrape tag data from [leetcode](https://leetcode.com) and emits them as events using [kafka](https://kafka.apache.org/). 
+This project allows users to retrieve tags from [leetcode](https://leetcode.com). 
 
 ## Configuration
 The following configurations can be specified in a `.env` file.
+
+##### MONGO_CONNECTION_STRING
+Type: `String`
+Default: None
+
+Specifies mongodb database uri for mongoose to connect to.
+
+```Javascript
+mongoose.connect(MONGO_CONNECTION_STRING); // Connects to the provided uri
+```
 
 ##### KAFKA_BROKERS
 Type: `String[]`
@@ -79,34 +95,6 @@ const producer: TagsProducer = new TagsProducer({
   clientId: KAFKA_CLIENT_ID,
   brokers: KAFKA_BROKERS
 }); // Sets up up a new producer instance
-```
-
-##### CRON_EXPRESSION
-Type: `String`
-Default: `'0 * * * *'`
-
-Specifies how often the `cronjob` should run.
-
-```javascript
-new CronJob(process.env.CRON_EXPRESSION || "0 * * * *"); // Runs at the start of every hour by default
-```
-
-##### SCHEDULED
-Type: `boolean`
-Default: `true`
-
-Specifies if the cronjob should be run/scheduled.
-
-##### TIMEZONE
-Type: `String`
-Default: `'UTC'`
-
-Specifies the timezone that the `cronjob` should use.
-
-```javascript
-cron.schedule(cronExpression, this.job, {
-  timezone: process.env.TIMEZONE || "UTC",
-});
 ```
 
 ##### PORT
@@ -143,5 +131,7 @@ res.status(200).json({
 
 ## Built With
 * [NodeJS](https://nodejs.org) - Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web browser.
+* [MongoDB](https://mongodb.com) - MongoDB is a source-available cross-platform document-oriented database program.
 * [Kafka](https://kafka.apache.org/) - Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
+* [Express.JS](https://expressjs.com) - Express.js, or simply Express, is a back end web application framework for Node.js, released as free and open-source software under the MIT License.
 * [Typescript](https://typescriptlang.org) - TypeScript is a free and open source programming language developed and maintained by Microsoft.
