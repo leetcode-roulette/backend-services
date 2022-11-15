@@ -19,5 +19,5 @@ export default {
 	],
 	testEnvironment: "node",
 	moduleNameMapper,
-	modulePaths: [config.compilerOptions.baseUrl],
+	modulePaths: [config.compilerOptions.baseUrl]
 };

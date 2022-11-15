@@ -1,4 +1,4 @@
-import LeetcodeAPI, { QuestionData } from "@libs/leetcodeAPI";
+import LeetcodeAPI, { QuestionData } from "..";
 
 describe("Leetcode API library LeetcodeAPI class tests", () => {
 	test("Can successfully grab problems from leetcode.com", async () => {

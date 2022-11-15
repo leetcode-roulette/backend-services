@@ -7,11 +7,6 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"declarationMap": true,
-		"paths": {
-			"@libs/*": ["libs/*"],
-			"@services/*": ["services/*"],
-			"@shared/*": ["shared/*"]
-		},
 		"baseUrl": "./src",
 		"outDir": "dist",
 		"target": "ES2022",
