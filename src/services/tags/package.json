@@ -7,7 +7,7 @@
     "test": "jest --passWithNoTests",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "start": ""
+    "start": "node dist/index.js"
   },
   "keywords": [
     "Tags",
