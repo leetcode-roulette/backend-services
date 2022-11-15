@@ -57,6 +57,7 @@ const getPageContent = async (url: string): Promise<string> => {
 
 		await page.goto(url, { waitUntil: "networkidle2" });
 		content = await page.content();
+		await browser.close();
 	} catch(e) {
 		logger.error("Could not fetch page contents from leetcode.com: " + e);
 		throw e;

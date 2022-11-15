@@ -7,6 +7,9 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"declarationMap": true,
+    "paths": {
+      "@packages/*": ["packages/*"]
+    },
 		"baseUrl": "./src",
 		"outDir": "dist",
 		"target": "ES2022",
