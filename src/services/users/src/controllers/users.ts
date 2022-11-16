@@ -2,7 +2,16 @@ import Users, { iUser } from "../models/users";
 import { Request, Response } from "express";
 import UserQuestionData, { iUserQuestionData } from "../models/userQuestionData";
 
+/**
+ * `UsersController` class for all user related business logic.
+ */
 export default class UsersController {
+
+	/**
+	 * Gets the currently authenticated users information.
+	 * @param req - Express Request object.
+	 * @param res - Express Response object.
+	 */
 	public static async getAuthenticatedUser(req: Request, res: Response): Promise<Response> {
 		try {
 			const user: iUser | null = await Users.findOne({ _id: req.user?.id });
@@ -10,7 +19,7 @@ export default class UsersController {
 
 			return res.status(200).json({
 				message: "Successfully retrieved authenticated user",
-				user: data
+				...data
 			});
 		} catch(e) {
 			return res.status(500).json({
@@ -20,7 +29,12 @@ export default class UsersController {
 		}
 	}
 
-	public static async findUserById(req: Request<{ username: string }, unknown, unknown, unknown>, res: Response): Promise<Response> {
+	/**
+	 * Gets a user by the specified username param.
+	 * @param req - Express Request object.
+	 * @param res - Express Response object.
+	 */
+	public static async findUserByUsername(req: Request<{ username: string }, unknown, unknown, unknown>, res: Response): Promise<Response> {
 		const username = req.params.username;
 		try {
 			const user: iUser | null = await Users.findOne({ username });
@@ -28,7 +42,7 @@ export default class UsersController {
 
 			return res.status(200).json({
 				message: "Successfully fetched user with username " + username,
-				user: data
+				...data
 			});
 		} catch(e) {
 			return res.status(500).json({
