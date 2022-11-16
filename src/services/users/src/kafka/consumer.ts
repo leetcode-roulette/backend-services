@@ -61,10 +61,11 @@ class UsersConsumer {
 					return;
 				}
 
-				const { username, questionTitle, isCompleted, hasBeenAttempted } = JSON.parse(message.value.toString());
+				const { username, questionTitle, questionDifficulty, isCompleted, hasBeenAttempted } = JSON.parse(message.value.toString());
 				await UserQuestionData.findOneAndUpdate({ username, questionTitle }, {
 					username,
 					questionTitle,
+					questionDifficulty,
 					isCompleted,
 					hasBeenAttempted
 				}, { upsert: true, new: true });

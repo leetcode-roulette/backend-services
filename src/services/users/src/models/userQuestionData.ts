@@ -5,24 +5,29 @@ import mongoose, { Model, Schema } from "mongoose";
  */
 export interface iUserQuestionData {
 
-  /**
-   * String value indicating the associated users username. Used to map back to a given user.
-   */
+	/**
+	 * String value indicating an associated users username. Used to map back to a given user.
+	 */
 	username: string;
 
-  /**
-   * String value indicating the questions title. Used to map back to a given question.
-   */
+	/**
+	 * String value indicating a questions title. Used to map back to a given question.
+	 */
 	questionTitle: string;
 
-  /**
-   * Boolean value indicating the completion status of a question.
-   */
+	/**
+	 * Number value indicating the difficulty of a question.
+	 */
+	questionDifficulty: number;
+
+	/**
+	 * Boolean value indicating the completion status of a question.
+	 */
 	isCompleted: boolean;
 
-  /**
-   * Boolean value indicating if a question has been attempted.
-   */
+	/**
+	 * Boolean value indicating if a question has been attempted.
+	 */
 	hasBeenAttempted: boolean;
 
 }
@@ -30,6 +35,7 @@ export interface iUserQuestionData {
 const UserQuestionDataSchema: Schema<iUserQuestionData> = new Schema({
 	username: { type: "string", required: true },
 	questionTitle: { type: "string", required: true },
+	questionDifficulty: { type: "number", required: true },
 	isCompleted: { type: "boolean", required: true },
 	hasBeenAttempted: { type: "boolean", required: true }
 });
