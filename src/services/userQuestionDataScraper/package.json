@@ -1,24 +1,21 @@
 {
-  "name": "users-scraper",
+  "name": "user-question-data-scraper",
   "version": "0.0.1",
-  "description": "scrapes user information from leetcode.",
+  "description": "Leetcode Roulette service to get a users question completion statuses.",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "dev": "nodemon src/index.ts",
     "start": "node dist/index.js",
-    "test": "jest --passWithNoTests",
-    "test:ci": "jest --coverage"
+    "test": "jest --passWithNoTests"
   },
   "keywords": [
     "Scraper",
     "Web-Scraper",
-    "Leetcode",
-    "Leetcode-Roulette",
+    "Service",
     "Microservices",
     "Microservice-Architecture",
-    "Node",
-    "NodeJS"
+    "Leetcode-Roulette"
   ],
   "dependencies": {
     "axios": "^1.1.3",
