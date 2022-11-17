@@ -1,8 +1,8 @@
 {
-  "name": "tags-scraper",
+  "name": "user-question-data-scraper",
   "version": "0.0.1",
-  "description": "Leetcode Roulette service to scrape tags off of leetcode.com",
-  "main": "index.js",
+  "description": "Leetcode Roulette service to get a users question completion statuses.",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "dev": "nodemon src/index.ts",
@@ -10,38 +10,28 @@
     "test": "jest --passWithNoTests"
   },
   "keywords": [
-    "Kafka",
-    "KafkaJS",
-    "Node",
+    "Scraper",
+    "Web-Scraper",
+    "Service",
     "Microservices",
-    "Leetcode",
-    "Leetcode",
-    "Roulette",
-    "Microservice",
-    "Architecture"
+    "Microservice-Architecture",
+    "Leetcode-Roulette"
   ],
-  "author": "Eric Hicks",
-  "license": "MIT",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
+    "axios": "^1.1.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "kafkajs": "^2.2.2",
-    "node-cron": "^3.0.2",
-    "puppeteer": "^19.2.2",
-    "puppeteer-extra": "^3.3.4",
-    "puppeteer-extra-plugin-stealth": "^2.11.1",
     "winston": "^3.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "@babel/preset-typescript": "^7.18.6",
+    "@types/axios": "^0.14.0",
     "@types/express": "^4.17.14",
     "@types/jest": "^29.0.3",
     "@types/node": "^18.7.18",
-    "@types/node-cron": "^3.0.6",
-    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
     "eslint": "^8.27.0",
@@ -51,5 +41,7 @@
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4"
-  }
+  },
+  "author": "Eric Hicks",
+  "license": "MIT"
 }
