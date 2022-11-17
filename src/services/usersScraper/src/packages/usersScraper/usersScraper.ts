@@ -5,7 +5,7 @@ import axios from "axios";
  * @param session - User to scrapes leetcode session token.
  * @returns An object containing the users information.
  */
-const scrape = async (session: string): Promise<object> => {
+const scrape = async (session: string): Promise<{ userId: number | null, username: string, avatar: string | null, isPremium: boolean | null }> => {
 	const url= "https://leetcode.com/graphql";
 	const query = `query {
 		userStatus {
