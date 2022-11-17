@@ -11,6 +11,8 @@ const isAuthorized = async (req: Request, res: Response, next: NextFunction): Pr
 		req.user = {
 			id: user._id,
 			username: user.username,
+			isPremium: user.isPremium,
+			avatar: user.avatar
 		};
 
 		return next();

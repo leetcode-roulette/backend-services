@@ -1,6 +1,7 @@
 import Users, { iUser } from "../models/users";
 import { Request, Response } from "express";
 import UserQuestionData, { iUserQuestionData } from "../models/userQuestionData";
+import { User } from "../types/custom";
 
 /**
  * `UsersController` class for all user related business logic.
@@ -14,8 +15,7 @@ export default class UsersController {
 	 */
 	public static async getAuthenticatedUser(req: Request, res: Response): Promise<Response> {
 		try {
-			const user: iUser | null = await Users.findOne({ _id: req.user?.id });
-			const data: object = await UsersController.getParsedUserData(user);
+			const data: object = await UsersController.getParsedUserData(req.user);
 
 			return res.status(200).json({
 				message: "Successfully retrieved authenticated user",
@@ -52,7 +52,7 @@ export default class UsersController {
 		}
 	}
 
-	private static async getParsedUserData(user: iUser | null) {
+	private static async getParsedUserData(user?: iUser | null | User) {
 		if (!user) {
 			throw new Error("No user found with provided id");
 		}
