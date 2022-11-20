@@ -1,0 +1,19 @@
+{
+  "name": "auth-service",
+  "version": "0.0.1",
+  "description": "Leetcode Roulette Service for authorizing a user through https://leetcode.com",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "jest --passWithNoTests"
+  },
+  "keywords": [
+    "Auth",
+    "Auth-Service",
+    "Authorization",
+    "Leetcode",
+    "Leetcode-Roulette",
+    "Microservices"
+  ],
+  "author": "Eric Hicks",
+  "license": "MIT"
+}

@@ -6,5 +6,6 @@ export type User = {
 }
 
 export type Session = {
-  userId: number
+  userId: number,
+  username: string
 }
