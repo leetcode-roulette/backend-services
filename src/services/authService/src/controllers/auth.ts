@@ -37,7 +37,7 @@ export default class AuthController {
 				value
 			}]);
 
-			res.status(201).send("User successfully synced.");
+			res.status(200).send("User successfully synced.");
 		} catch(e) {
 			res.status(500).json({
 				message: "Failed to sync user",
@@ -51,17 +51,17 @@ export default class AuthController {
 	 * @param req - Express Request object
 	 * @param res - Express Response object
 	 */
-	public static async logout(req: Request, res: Response): Promise<void> {
+	public static logout(req: Request, res: Response) {
 		if (!req.session.user) {
-			res.send("No user session found");
+			res.status(200).send("No user session found");
 			return;
 		}
 
 		req.session.destroy(e => {
 			if (e) {
-				res.status(400).send("Error deleting session: " + e);
+				return res.status(400).send("Error deleting session: " + e);
 			} else {
-				res.status(201).send("Successfully logged out user");
+				return res.status(200).send("Successfully logged out user");
 			}
 		});
 	}
