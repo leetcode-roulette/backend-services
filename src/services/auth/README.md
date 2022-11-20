@@ -56,20 +56,10 @@ This will run the tests in any file in the `src` directory following the specifi
 * `"**/tests/**/*.test.ts"`
 
 ## Features
-This project allows users to retrieve tags from [leetcode](https://leetcode.com). 
+This project allows users to sync and unsync leetcode cookies from [leetcode](https://leetcode.com). 
 
 ## Configuration
 The following configurations can be specified in a `.env` file.
-
-##### MONGO_CONNECTION_STRING
-Type: `String`
-Default: None
-
-Specifies mongodb database uri for mongoose to connect to.
-
-```Javascript
-mongoose.connect(MONGO_CONNECTION_STRING); // Connects to the provided uri
-```
 
 ##### KAFKA_BROKERS
 Type: `String[]`
@@ -124,7 +114,6 @@ res.status(200).json({
 
 ## Built With
 * [NodeJS](https://nodejs.org) - Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web browser.
-* [MongoDB](https://mongodb.com) - MongoDB is a source-available cross-platform document-oriented database program.
 * [Kafka](https://kafka.apache.org/) - Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 * [Express.JS](https://expressjs.com) - Express.js, or simply Express, is a back end web application framework for Node.js, released as free and open-source software under the MIT License.
 * [Typescript](https://typescriptlang.org) - TypeScript is a free and open source programming language developed and maintained by Microsoft.
