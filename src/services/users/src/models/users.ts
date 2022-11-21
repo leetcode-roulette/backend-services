@@ -5,26 +5,26 @@ import mongoose, { Model, Schema } from "mongoose";
  */
 export interface iUser {
 
-  /**
-   * Number value indicating a users user id.
-   */
+	/**
+	 * Number value indicating a users user id.
+	 */
 	_id: number;
 
-  /**
-   * String value indicating a users username.
-   */
+	/**
+	 * String value indicating a users username.
+	 */
 	username: string;
 
-  /**
-   * String value indicating the url locating of a users avatar.
-   */
+	/**
+	 * String value indicating the url locating of a users avatar.
+	 */
 	avatar: string;
 
-  /**
-   * Boolean value indicating if a user is a premium user or not.
-   */
+	/**
+	 * Boolean value indicating if a user is a premium user or not.
+	 */
 	isPremium: boolean;
-  
+	
 }
 
 const UserSchema: Schema<iUser> = new Schema({

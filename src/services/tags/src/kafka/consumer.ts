@@ -11,7 +11,7 @@ class TagsConsumer {
 	}
 
 	public async consume(): Promise<void> {
-		const consumer: Consumer = this.kafka.consumer({ groupId: "roulette-group" });
+		const consumer: Consumer = this.kafka.consumer({ groupId: "tags" });
 		await consumer.connect();
 		await consumer.subscribe({
 			topics: [ "tags" ],

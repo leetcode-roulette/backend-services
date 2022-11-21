@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 
 const isAuthorized = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 	try {
-		const user: iUser | null = await Users.findById( req.session?.userId );
+		const user: iUser | null = await Users.findById( req.cookies.userId );
 		if (!user) {
 			throw new Error("Unauthorized!");
 		}
@@ -21,7 +21,6 @@ const isAuthorized = async (req: Request, res: Response, next: NextFunction): Pr
 			message: "Failed to retrieve currently authorized user",
 			errors: e
 		});
-		return next(e);
 	}
 };
 

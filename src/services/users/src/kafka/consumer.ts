@@ -29,9 +29,9 @@ class UsersConsumer {
 					return;
 				}
 
-				const { id, username, avatar, isPremium } = JSON.parse(message.value.toString());
+				const { userId, username, avatar, isPremium } = JSON.parse(message.value.toString());
 				await Users.findOneAndUpdate({ username }, {
-					_id: id,
+					_id: userId,
 					username,
 					avatar,
 					isPremium
