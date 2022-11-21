@@ -6,16 +6,16 @@ Backend service monorepo for [Leetcode Roulette](https://leetcoderoulette.com) a
 ### Getting Started
 To get started running the services locally, clone the repository to your local machine and change to the project root directory. Next, change to the service(s) you'd like to run's root directory and read the `README` file for specific instructions.
 
+```
+git clone https://github.com/leetcode-roulette/backend-services.git
+cd backend-services
+```
+
 ### Features
 * Users can sync their Leetcode profile to retrieve their profile information.
 * Users can get a list of Leetcode questions including their current completion status.
 * Users can retrieve a list of all Leetcode tags.
 * Users can search up another synced users information by their username.
-
-```
-git clone https://github.com/leetcode-roulette/backend-services.git
-cd backend-services
-```
 
 ### API Endpoints
 | HTTP Verbs | Endpoints | Action |
