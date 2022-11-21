@@ -14,7 +14,7 @@ class UserQuestionDataConsumer {
 	}
 
 	public async consume(): Promise<void> {
-		const consumer: Consumer = this.kafka.consumer({ groupId: "roulette-group" });
+		const consumer: Consumer = this.kafka.consumer({ groupId: "user-question-data-scraper" });
 		await consumer.connect();
 		await consumer.subscribe({
 			topics: [ "signin" ],

@@ -20,10 +20,7 @@ describe("Tests for `UsersController` related routes", () => {
 		const mockApp = express();
 		mockApp.use(session({ secret: "test", resave: true, saveUninitialized: true }));
 		mockApp.all("*", function(req, res, next) {
-			req.session.user = {
-				username: "test",
-				userId: 1
-			};
+			req.cookies = { userId: 1 };
 			next();
 		});
 

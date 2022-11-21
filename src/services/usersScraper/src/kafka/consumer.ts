@@ -14,7 +14,7 @@ class UsersScraperConsumer {
 	}
 
 	public async consume(): Promise<void> {
-		const consumer: Consumer = this.kafka.consumer({ groupId: "roulette-group" });
+		const consumer: Consumer = this.kafka.consumer({ groupId: "users-scraper" });
 		await consumer.connect();
 		await consumer.subscribe({
 			topics: [ "signin" ],
@@ -22,6 +22,7 @@ class UsersScraperConsumer {
 		});
 		await consumer.run({
 			eachMessage: async ({ topic, message }) => {
+
 				if (!message.value) {
 					return;
 				}

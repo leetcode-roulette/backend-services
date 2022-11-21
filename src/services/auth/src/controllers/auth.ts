@@ -24,14 +24,12 @@ export default class AuthController {
 			if (user.userId === null) throw new Error("Invalid session cookie");
 
 			const value = JSON.stringify({
-				sessionCookie,
+				session: sessionCookie,
 				...user
 			});
 
-			req.session.user = {
-				userId: user.userId,
-				username: user.username
-			};
+			res.cookie("userId", user.userId);
+			res.cookie("LEETCODE_SESSION", sessionCookie);
 
 			await AuthController.producer.produce([{
 				value
@@ -52,17 +50,14 @@ export default class AuthController {
 	 * @param res - Express Response object
 	 */
 	public static logout(req: Request, res: Response) {
-		if (!req.session.user) {
+		if (!req.cookies.userId) {
 			res.status(200).send("No user session found");
 			return;
 		}
 
-		req.session.destroy(e => {
-			if (e) {
-				return res.status(400).send("Error deleting session: " + e);
-			} else {
-				return res.status(200).send("Successfully logged out user");
-			}
-		});
+		res.clearCookie("userId");
+		res.clearCookie("LEETCODE_SESSION");
+
+		res.status(200).send("Successfully logged out user");
 	}
 }
