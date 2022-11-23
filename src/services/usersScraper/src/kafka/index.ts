@@ -1,4 +1,4 @@
-import UsersScraperConsumer from "./consumer";
-import UsersScraperProducer from "./producer";
+import UserScraperConsumer from "./consumer";
+import ScraperProducer from "./producer";
 
-export { UsersScraperConsumer, UsersScraperProducer };
+export { UserScraperConsumer, ScraperProducer };

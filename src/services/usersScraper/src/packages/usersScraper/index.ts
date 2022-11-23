@@ -1,3 +1,3 @@
-import scrape from "./usersScraper";
+import scrapeUserData from "./usersScraper";
 
-export default scrape;
+export default scrapeUserData;
