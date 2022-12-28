@@ -17,8 +17,7 @@ export const scrape = async (): Promise<Array<object>> => {
 
 			data.push({
 				name: $(spans[0]).text(),
-				slug: $(elm).attr("href")?.split("/")[2],
-				numberOfProblems: parseInt($(spans[1]).text())
+				slug: $(elm).attr("href")?.split("/")[2]
 			});
 		});
 	} catch(e) {
