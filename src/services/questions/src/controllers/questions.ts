@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Query } from "./query";
 import { Questions, iQuestion } from "../models/questions";
 import { UserQuestionStatuses, iUserQuestionStatus } from "../models/userQuestionStatuses";
-import { ExpressQuery } from "./interfaces/query";
+import { ExpressQuery, MongooseQuery } from "./interfaces/query";
 import { QuestionData } from "./interfaces/questionData";
 
 /**
@@ -18,18 +18,19 @@ export default class QuestionsController {
 	public static async getAllQuestions(req: Request<unknown, unknown, unknown, ExpressQuery>, res: Response) {
 		const limit = req.query.limit;
 		const page = req.query.page;
-		const userId: number | null = req.cookies.userId;
+		const userId: number | undefined = req.cookies.userId;
 
 		try {
 			const query: Query = new Query(req.query);
-			const questions: Array<iQuestion> = await Questions.find(await query.getQuery)
-				.sort(this.getParsedSortString(req.query.sort))
+			const mongooseQuery: MongooseQuery = await query.getQuery();
+			const questions: Array<iQuestion> = await Questions.find(mongooseQuery)
+				.sort(QuestionsController.getParsedSortString(req.query.sort))
 				.limit(limit)
 				.skip((page - 1) * limit);
 			const userQuestionStatuses: Array<iUserQuestionStatus> = await UserQuestionStatuses.find({ userId });
 			const statuses: {[key: number]: iUserQuestionStatus} = {};
 			userQuestionStatuses.forEach(status => statuses[status.questionId] = status);
-			const parsedQuestions = questions.map(question => this.getParsedQuestion(question, statuses[question._id]));
+			const parsedQuestions = questions.map(question => QuestionsController.getParsedQuestion(question, statuses[question._id]));
 
 			res.status(200).json({
 				message: "Successfully retrieved questions",
@@ -60,7 +61,7 @@ export default class QuestionsController {
 				throw new Error("No problem found with provided title slug.");
 			}
 
-			const parsedQuestion: QuestionData = this.getParsedQuestion(question, userQuestionStatus);
+			const parsedQuestion: QuestionData = QuestionsController.getParsedQuestion(question, userQuestionStatus);
 
 			res.status(200).json({
 				message: "Successfully retrieved question by slug.",
@@ -74,10 +75,10 @@ export default class QuestionsController {
 		}
 	}
 
-	private static getParsedSortString(sortString: string): string {
-		const validStrings: Set<string> = new Set(["-difficulty", "-title", "-_id"]);
+	private static getParsedSortString(sortString = "_id"): string {
+		const validStrings: Set<string> = new Set(["-difficulty", "-title", "-_id", "difficulty", "title", "_id"]);
 
-		if (validStrings.has(sortString) || validStrings.has("-" + sortString)) {
+		if (validStrings.has(sortString)) {
 			return sortString;
 		}
 

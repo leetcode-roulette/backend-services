@@ -62,9 +62,9 @@ export interface iQuestion {
 }
 
 const QuestionSchema: Schema<iQuestion> = new Schema({
-	_id: { type: "number", unique: true, required: true },
+	_id: { type: "number" },
 	frontendId: { type: "number", required: true },
-	title: { type: "string", unique: true, "required": true },
+	title: { type: "string", unique: true, required: true },
 	slug: { type: "string", unique: true, required: true },
 	difficulty: { type: "number", required: true },
 	tags: { type: ["string"], required: true },
