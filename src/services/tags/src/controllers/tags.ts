@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Tags, iTag } from "../models/tags";
 import { QuestionTags, iQuestionTag } from "../models/questionTags";
+import { ParsedTag } from "./interfaces/tags";
 import { Query } from "./interfaces/query";
 
 /**
@@ -41,7 +42,7 @@ export default class TagsController {
 		}
 	}
 
-	private static getParsedTagData(tags: Array<iTag>, questionTags: Array<iQuestionTag>): Array<object> {
+	private static getParsedTagData(tags: Array<iTag>, questionTags: Array<iQuestionTag>): Array<ParsedTag> {
 		const numberOfQuestions = this.getNumberOfQuestions(questionTags);
 
 		return tags.map(tag => ({
