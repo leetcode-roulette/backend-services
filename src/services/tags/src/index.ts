@@ -6,16 +6,17 @@ import TagsConsumer from "./kafka";
 const serve = async () => {
 	const PORT = process.env.PORT || 3000;
 	const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://localhost:27017/tagsService";
-	const KAFKA_BROKERS = process.env.KAFKA_BROKERS?.split(" ") || ["kafka1:9092", "kafka2:9092"];
+	const KAFKA_BROKERS = process.env.KAFKA_BROKERS?.split(",") || ["kafka1:9092", "kafka2:9092"];
 	const KAFKA_CLIENT_ID = process.env.KAFKA_CLIENT_ID || "leetcode-roulette";
+	logger.info(`KAFKA_BROKERS: ${KAFKA_BROKERS} `);
 
 	const consumer: TagsConsumer = new TagsConsumer({
 		clientId: KAFKA_CLIENT_ID,
-		brokers: KAFKA_BROKERS
+		brokers: KAFKA_BROKERS,
 	});
 
-	mongoose.connect(MONGO_CONNECTION_STRING).catch(e => logger.error("Error connecting to database: " + e));
-	consumer.consume().catch(e => logger.error("Error connecting to kafka: " + e));
+	mongoose.connect(MONGO_CONNECTION_STRING).catch((e) => logger.error("Error connecting to database: " + e));
+	consumer.consume();
 
 	app.listen(PORT, () => {
 		logger.info(`Server is listening on port ${PORT}`);

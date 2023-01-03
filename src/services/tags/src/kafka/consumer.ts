@@ -12,10 +12,12 @@ class TagsConsumer {
 
 	public async consume(): Promise<void> {
 		const consumer: Consumer = this.kafka.consumer({ groupId: "tags" });
-		await consumer.connect();
+		await consumer.connect().catch((e) => {
+			logger.error("Error connecting to kafka: " + e);
+		});
 		await consumer.subscribe({
-			topics: [ "tags" ],
-			fromBeginning: true
+			topics: ["tags"],
+			fromBeginning: true,
 		});
 		await consumer.run({
 			eachMessage: async ({ topic, message }) => {
@@ -24,17 +26,21 @@ class TagsConsumer {
 				}
 
 				const { slug, name, numberOfProblems } = JSON.parse(message.value.toString());
-				await Tags.findOneAndUpdate({ slug }, {
-					slug,
-					name,
-					numberOfProblems
-				}, { new: true, upsert: true }).catch(e => logger.error(e));
+				await Tags.findOneAndUpdate(
+					{ slug },
+					{
+						slug,
+						name,
+						numberOfProblems,
+					},
+					{ new: true, upsert: true }
+				).catch((e) => logger.error(e));
 
 				console.log({
 					topic: topic.toString(),
-					message: JSON.parse(message.value.toString())
+					message: JSON.parse(message.value.toString()),
 				});
-			}
+			},
 		});
 	}
 
