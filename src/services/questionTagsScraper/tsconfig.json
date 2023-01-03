@@ -8,9 +8,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"declarationMap": true,
 		"paths": {
-			"@models/*": ["models/*"],
-			"@controllers/*": ["controllers/*"],
-			"@routes/*": ["routes/*"]
+			"@packages/*": ["packages/*"]
 		},
 		"baseUrl": "./src",
 		"outDir": "dist",

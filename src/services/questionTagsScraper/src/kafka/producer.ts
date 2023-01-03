@@ -1,6 +1,6 @@
 import { Kafka, KafkaConfig, Message, Partitioners, Producer } from "kafkajs";
 
-class QuestionProducer {
+class QuestionTagProducer {
 	private readonly kafka: Kafka;
 	private readonly producer: Producer;
 
@@ -14,7 +14,7 @@ class QuestionProducer {
 	public async produce(messages: Array<Message>): Promise<void> {
 		await this.producer.connect();
 		await this.producer.send({
-			topic: "questions",
+			topic: "questionTags",
 			messages
 		});
 	}
@@ -24,4 +24,4 @@ class QuestionProducer {
 	}
 }
 
-export default QuestionProducer;
+export default QuestionTagProducer;

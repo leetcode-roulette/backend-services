@@ -3,7 +3,7 @@ import scrape from "@packages/questionsScraper/scraper";
 import transformQuestionData from "@packages/questionsScraper/transform";
 import { QuestionData } from "@packages/questionsScraper/types";
 
-describe("Tests for `userQuestionDataScraper` package", () => {
+describe("Tests for `questionScraper` package", () => {
 	test("Can scrape leetcode.com for question data", async () => {
 		expect(scrape).not.toThrowError();
 	}, 35000);
