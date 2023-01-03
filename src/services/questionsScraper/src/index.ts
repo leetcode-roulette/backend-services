@@ -1,6 +1,6 @@
 import { app } from "./app";
 import { logger } from "./logger";
-import TagsProducer from "./kafka";
+import QuestionsProducer from "./kafka";
 import scrape from "./packages/questionsScraper";
 import { Cronjob } from "./packages/cronjob";
 
@@ -10,7 +10,7 @@ const serve = async () : Promise<void> => {
 	const KAFKA_CLIENT_ID = process.env.KAFKA_CLIENT_ID || "leetcode-roulette";
 	const CRON_EXPRESSION = process.env.CRON_EXPRESSION || "0 0 * * *";
 
-	const producer: TagsProducer = new TagsProducer({
+	const producer: QuestionsProducer = new QuestionsProducer({
 		clientId: KAFKA_CLIENT_ID,
 		brokers: KAFKA_BROKERS
 	});

@@ -1,3 +1,3 @@
-import questionsProducer from "./producer";
+import QuestionsProducer from "./producer";
 
-export default questionsProducer;
+export default QuestionsProducer;
