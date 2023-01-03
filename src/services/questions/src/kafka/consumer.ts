@@ -31,10 +31,7 @@ class QuestionsConsumer {
 				}
 
 				const question = JSON.parse(message.value.toString());
-				await Questions.findOneAndUpdate({ _id: question.id }, {
-					...question,
-					_id: question.id
-				}, { upsert: true, new: true });
+				await Questions.findOneAndUpdate({ _id: question._id }, question, { upsert: true, new: true });
 
 				console.log({
 					topic: topic.toString(),
