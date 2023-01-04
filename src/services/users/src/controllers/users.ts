@@ -59,15 +59,32 @@ export default class UsersController {
 
 		const username = user.username;
 		const userQuestionData: Array<iUserQuestionData> = await UserQuestionData.find({ username });
+		const completed = [0, 0, 0];
+		let total = 0;
+
+		userQuestionData.forEach(question => {
+			if (question.isCompleted) {
+				total++;
+				completed[question.questionDifficulty]++;
+			}
+		});
+
 		return ({
 			message: "Successfully fetched user with username " + username,
 			user: {
 				username,
 				avatar: user.avatar,
 				is_premium: user.isPremium,
-				accepted: userQuestionData.filter(question => question.isCompleted).length,
+				accepted: {
+					total,
+					easy: completed[0],
+					medium: completed[1],
+					hard: completed[2]
+				},
 				question_statuses: userQuestionData.map(question => ({
+					id: question.questionId,
 					title: question.questionTitle,
+					difficulty: question.questionDifficulty,
 					isCompleted: question.isCompleted,
 					hasBeenAttempted: question.hasBeenAttempted
 				}))

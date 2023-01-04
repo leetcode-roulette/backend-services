@@ -11,6 +11,11 @@ export interface iUserQuestionData {
 	username: string;
 
 	/**
+	 * Number value indicating the associated questions id.
+	 */
+	questionId: number;
+
+	/**
 	 * String value indicating a questions title. Used to map back to a given question.
 	 */
 	questionTitle: string;
@@ -34,6 +39,7 @@ export interface iUserQuestionData {
 
 const UserQuestionDataSchema: Schema<iUserQuestionData> = new Schema({
 	username: { type: "string", required: true },
+	questionId: { type: "number", required: true },
 	questionTitle: { type: "string", required: true },
 	questionDifficulty: { type: "number", required: true },
 	isCompleted: { type: "boolean", required: true },

@@ -1,5 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 
+const difficulty: {[key: string]: number} = {
+	"Easy": 0,
+	"Medium": 1,
+	"Hard": 2
+};
+
 /**
  * Gets an object containing a users information and question statuses from leetcodes graphql client.
  * @param session - User to scrape's leetcode session token.
@@ -13,7 +19,7 @@ const scrape = async (session: string): Promise<{
 	questions: Array<{
 		isCompleted: boolean,
 		hasBeenAttempted: boolean,
-		difficulty: string,
+		difficulty: number,
 		questionTitle: string,
 		questionTitleSlug: string,
 		questionId: number,
@@ -49,7 +55,7 @@ const scrape = async (session: string): Promise<{
 			questions: questions.map(question => ({
 				isCompleted: question.status === "ac",
 				hasBeenAttempted: question.status !== null,
-				difficulty: question.difficulty,
+				difficulty: difficulty[question.difficulty],
 				questionTitle: question.questionTitle,
 				questionTitleSlug: question.questionTitleSlug,
 				questionId: parseInt(question.questionId),
