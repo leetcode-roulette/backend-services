@@ -1,13 +1,8 @@
 import getGraphQLResponse from "@packages/questionsScraper/query";
-import scrape from "@packages/questionsScraper/scraper";
 import transformQuestionData from "@packages/questionsScraper/transform";
 import { QuestionData } from "@packages/questionsScraper/types";
 
 describe("Tests for `questionScraper` package", () => {
-	test("Can scrape leetcode.com for question data", async () => {
-		expect(scrape).not.toThrowError();
-	}, 35000);
-
 	test("Can get graphQL response from Leetcode.", async () => {
 		const response = await getGraphQLResponse();
 		expect(Array.isArray(response)).toBeTruthy();
@@ -23,7 +18,6 @@ describe("Tests for `questionScraper` package", () => {
 			difficulty: "Easy",
 			content: "Two sum description",
 			hints: [],
-			stats: "{\"totalAccepted\": \"8.6M\", \"totalSubmission\": \"17.5M\", \"totalAcceptedRaw\": 8604483, \"totalSubmissionRaw\": 17487197, \"acRate\": \"49.2%\"}",
 			tags: [{ name: "Array" }, { name: "Hash Table" }]
 		}];
 

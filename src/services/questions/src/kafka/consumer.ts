@@ -31,6 +31,8 @@ class QuestionsConsumer {
 					return;
 				}
 
+				console.log("Here!");
+
 				const question = JSON.parse(message.value.toString());
 				await Questions.findOneAndUpdate({ _id: question._id }, question, { upsert: true, new: true });
 
@@ -78,7 +80,7 @@ class QuestionsConsumer {
 		const consumer: Consumer = await this.kafka.consumer({ groupId: "userQuestionStatuses" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "userQuestionStatuses" ],
+			topics: [ "userQuestionData" ],
 			fromBeginning: true
 		});
 
@@ -88,10 +90,12 @@ class QuestionsConsumer {
 					return;
 				}
 
-				const { userId, questionTitle } = JSON.parse(message.value.toString());
-				await UserQuestionStatuses.findOneAndUpdate({ userId, questionTitle }, {
+				const { userId, questionId, isCompleted, hasBeenAttempted } = JSON.parse(message.value.toString());
+				await UserQuestionStatuses.findOneAndUpdate({ userId, questionId }, {
 					userId,
-					questionTitle
+					questionId,
+					isCompleted,
+					hasBeenAttempted
 				}, { upsert: true, new: true });
 
 				console.log({

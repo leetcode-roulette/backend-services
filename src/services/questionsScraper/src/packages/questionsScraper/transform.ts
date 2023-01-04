@@ -1,4 +1,4 @@
-import { QuestionData, ParsedQuestion, Stats } from "./types";
+import { QuestionData, ParsedQuestion } from "./types";
 
 
 /**
@@ -8,7 +8,6 @@ import { QuestionData, ParsedQuestion, Stats } from "./types";
  */
 const transformQuestionData = (questionData: Array<QuestionData>): Array<ParsedQuestion> => {
 	const parsedQuestions: Array<ParsedQuestion> = questionData.map(question => {
-		const stats: Stats = JSON.parse(question.stats);
 		const difficulty: {[key: string]: number} = {
 			"Easy": 0,
 			"Medium": 1,
@@ -23,8 +22,6 @@ const transformQuestionData = (questionData: Array<QuestionData>): Array<ParsedQ
 			difficulty: difficulty[question.difficulty],
 			isPremium: question.isPaidOnly,
 			content: question.content,
-			accepted: stats.totalAcceptedRaw,
-			submissions: stats.totalSubmissionRaw,
 			hints: question.hints,
 			tags: question.tags.map(tag => tag.name)
 		};

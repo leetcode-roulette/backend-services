@@ -8,7 +8,7 @@ const serve = async () : Promise<void> => {
 	const PORT: string | number = process.env.PORT || 3000;
 	const KAFKA_BROKERS = process.env.KAFKA_BROKERS?.split(" ") || ["kafka1:9092", "kafka2:9092"];
 	const KAFKA_CLIENT_ID = process.env.KAFKA_CLIENT_ID || "leetcode-roulette";
-	const CRON_EXPRESSION = process.env.CRON_EXPRESSION || "0 0 * * *";
+	const CRON_EXPRESSION = process.env.CRON_EXPRESSION || "0 0 * * * *";
 
 	const producer: QuestionTagProducer = new QuestionTagProducer({
 		clientId: KAFKA_CLIENT_ID,

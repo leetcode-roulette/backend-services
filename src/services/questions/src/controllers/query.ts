@@ -57,14 +57,14 @@ export class Query {
 	private getDifficulty(difficulty: string): number {
 		switch (difficulty.toLowerCase()) {
 		case "easy":
-			return 1;
+			return 0;
 		case "medium":
-			return 2;
+			return 1;
 		case "hard":
-			return 3;
+			return 2;
 		}
 
-		return parseInt(difficulty);
+		return parseInt(difficulty) - 1;
 	}
 
 	private getPremiumStatus(premium: boolean | undefined): void {

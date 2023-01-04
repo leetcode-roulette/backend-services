@@ -7,16 +7,7 @@ export interface QuestionData {
   titleSlug: string;
   isPaidOnly: boolean;
   hints: Array<string>;
-  stats: string;
   tags: Array<{ name: string }>;
-}
-
-export interface Stats {
-  totalAccepted: string;
-  totalSubmission: string;
-  totalAcceptedRaw: number;
-  totalSubmissionRaw: number;
-  acRate: string;
 }
 
 export interface ParsedQuestion {
@@ -28,7 +19,5 @@ export interface ParsedQuestion {
   slug: string;
   isPremium: boolean;
   hints: Array<string>;
-  accepted: number;
-  submissions: number;
   tags: Array<string>;
 }

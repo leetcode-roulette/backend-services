@@ -92,13 +92,10 @@ export default class QuestionsController {
 			tags: question.tags,
 			id: question._id,
 			frontend_id: question.frontendId,
-			difficulty: question.difficulty,
+			difficulty: question.difficulty + 1,
 			premium: question.isPremium,
 			description: question.content,
 			hints: question.hints,
-			accepted: question.accepted,
-			submitted: question.submissions,
-			acceptance_rate: question.accepted / question.submissions,
 			completed: false,
 			attempted: false
 		};

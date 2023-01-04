@@ -46,16 +46,6 @@ export interface iQuestion {
 	isPremium: boolean;
 
 	/**
-	 * Number value indicating the number of accepted solutions.
-	 */
-	accepted: number;
-
-	/**
-	 * Number value indicating the number of submissions.
-	 */
-	submissions: number;
-
-	/**
 	 * Array of hints for a question.
 	 */
 	hints: Array<string>;
@@ -70,8 +60,6 @@ const QuestionSchema: Schema<iQuestion> = new Schema({
 	tags: { type: ["string"], required: true },
 	content: { type: "string", required: true },
 	isPremium: { type: "boolean", required: true },
-	accepted: { type: "number", required: true },
-	submissions: { type: "number", required: true },
 	hints: { type: ["string"], required: true }
 });
 

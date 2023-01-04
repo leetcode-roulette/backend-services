@@ -11,9 +11,6 @@ export interface QuestionData {
   premium: boolean;
   description: string;
   hints: Array<string>;
-  accepted: number;
-  submitted: number;
-  acceptance_rate: number;
   completed?: boolean;
   attempted?: boolean;
 }
