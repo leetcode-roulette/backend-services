@@ -1,66 +1,11 @@
-import puppeteer from "puppeteer-extra";
-import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { Browser, executablePath } from "puppeteer";
-import { CheerioAPI, load } from "cheerio";
-import { logger } from "../../logger";
+import { AxiosResponse } from "axios";
+import { getGraphQL } from "./getGraphQL";
+import { getTags } from "./getTags";
+import { Question, Tag } from "./types";
 
-puppeteer.use(StealthPlugin());
-
-export const scrape = async (): Promise<Array<object>> => {
-	const data: Array<object> = [];
-
-	try {
-		const content = await getPageContent("https://leetcode.com/problemset/all/");
-		const $: CheerioAPI = load(content);
-		$("div.group > a.items-center").each((i, elm) => {
-			const spans = $(elm).children();
-
-			data.push({
-				name: $(spans[0]).text(),
-				slug: $(elm).attr("href")?.split("/")[2]
-			});
-		});
-	} catch(e) {
-		throw new Error("Error scraping tags from leetcode: " + e);
-	}
-
-	return data;
-};
-
-const startBrowser = async (): Promise<Browser> => {
-	let browser: Browser;
-
-	try {
-		browser = await puppeteer.launch({
-			args: [
-				"--no-sandbox",
-			],
-			headless: false,
-			ignoreHTTPSErrors: true,
-			executablePath: executablePath()
-		});
-	} catch(e) {
-		logger.error("Could not create a new browser instance: " + e);
-		throw e;
-	}
-
-	return browser;
-};
-
-const getPageContent = async (url: string): Promise<string> => {
-	let content: string;
-
-	try {
-		const browser = await startBrowser();
-		const [page] = await browser.pages();
-
-		await page.goto(url, { waitUntil: "networkidle2" });
-		content = await page.content();
-		await browser.close();
-	} catch(e) {
-		logger.error("Could not fetch page contents from leetcode.com: " + e);
-		throw e;
-	}
-
-	return content;
+export const scrape = async (): Promise<Array<Tag>> => {
+	const response: AxiosResponse = await getGraphQL();
+	const questions: Array<Question> = response.data.problemsetQuestionList.questions;
+	const tags = getTags(questions);
+	return tags;
 };
