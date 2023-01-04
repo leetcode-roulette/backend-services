@@ -13,6 +13,7 @@ class QuestionsConsumer {
 
 	public async consume(): Promise<void> {
 		await this.consumeQuestions();
+		await this.consumeQuestionTags();
 		await this.consumeUserQuestionStatuses();
 	}
 
