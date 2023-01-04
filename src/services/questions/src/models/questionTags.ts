@@ -18,8 +18,8 @@ export interface iQuestionTag {
 }
 
 const QuestionTagSchema: Schema<iQuestionTag> = new Schema({
-	questionId: { type: "number", unique: true, required: true },
-	tagSlug: { type: "string", unique: true, required: true },
+	questionId: { type: "number", required: true },
+	tagSlug: { type: "string", required: true },
 });
 
 export const QuestionTags: Model<iQuestionTag> = mongoose.model("questionTags", QuestionTagSchema);

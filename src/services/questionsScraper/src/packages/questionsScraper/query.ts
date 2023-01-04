@@ -19,7 +19,6 @@ const getGraphQLResponse = async (): Promise<Array<QuestionData>> => {
 				titleSlug
 				isPaidOnly
 				hints
-				stats
 				tags: topicTags {
 						name
 				}
@@ -34,5 +33,6 @@ const getGraphQLResponse = async (): Promise<Array<QuestionData>> => {
 		throw new Error("Error scraping user info from leetcode: " + e);
 	}
 };
+
 
 export default getGraphQLResponse;
