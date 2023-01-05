@@ -14,7 +14,7 @@ class UserQuestionDataProducer {
 	public async produce(messages: Array<Message>): Promise<void> {
 		await this.producer.connect();
 		await this.producer.send({
-			topic: "roulette.userQuestionStatus.scraped",
+			topic: "roulette.user-question-status.scraped",
 			messages
 		});
 	}

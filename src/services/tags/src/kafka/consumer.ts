@@ -47,7 +47,7 @@ class TagsConsumer {
 		const consumer: Consumer = this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "roulette.questionTag.scraped" ],
+			topics: [ "roulette.question-tag.scraped" ],
 			fromBeginning: true
 		});
 		await consumer.run({

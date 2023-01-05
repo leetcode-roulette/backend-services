@@ -14,7 +14,7 @@ class QuestionTagProducer {
 	public async produce(messages: Array<Message>): Promise<void> {
 		await this.producer.connect();
 		await this.producer.send({
-			topic: "roulette.questionTag.scraped",
+			topic: "roulette.question-tag.scraped",
 			messages
 		});
 	}

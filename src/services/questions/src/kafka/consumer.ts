@@ -48,7 +48,7 @@ class QuestionsConsumer {
 		const consumer: Consumer = await this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "roulette.questionTag.scraped" ],
+			topics: [ "roulette.question-tag.scraped" ],
 			fromBeginning: true
 		});
 
@@ -78,7 +78,7 @@ class QuestionsConsumer {
 		const consumer: Consumer = await this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "roulette.userQuestionStatus.scraped" ],
+			topics: [ "roulette.user-question-status.scraped" ],
 			fromBeginning: true
 		});
 
