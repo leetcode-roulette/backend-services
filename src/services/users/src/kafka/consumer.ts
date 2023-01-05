@@ -16,10 +16,10 @@ class UsersConsumer {
 	}
 
 	private async consumeUsers(): Promise<void> {
-		const consumer: Consumer = await this.kafka.consumer({ groupId: "users" });
+		const consumer: Consumer = await this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "users" ],
+			topics: [ "roulette.user.scraped" ],
 			fromBeginning: true
 		});
 
@@ -48,7 +48,7 @@ class UsersConsumer {
 	}
 
 	private async consumeUserQuestionData(): Promise<void> {
-		const consumer: Consumer = await this.kafka.consumer({ groupId: "userQuestionData" });
+		const consumer: Consumer = await this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
 			topics: [ "roulette.auth.signin" ],

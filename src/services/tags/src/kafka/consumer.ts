@@ -17,10 +17,10 @@ class TagsConsumer {
 	}
 
 	private async consumeTags(): Promise<void> {
-		const consumer: Consumer = this.kafka.consumer({ groupId: "tags" });
+		const consumer: Consumer = this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "tags" ],
+			topics: [ "roulette.tag.scraped" ],
 			fromBeginning: true
 		});
 		await consumer.run({
@@ -44,10 +44,10 @@ class TagsConsumer {
 	}
 
 	private async consumeQuestionTags(): Promise<void> {
-		const consumer: Consumer = this.kafka.consumer({ groupId: "questionTags" });
+		const consumer: Consumer = this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "questionTags" ],
+			topics: [ "roulette.questionTag.scraped" ],
 			fromBeginning: true
 		});
 		await consumer.run({
