@@ -78,3 +78,65 @@ interface Search {
 interface QuestionId {
 	$in: Array<number>;
 }
+
+/**
+ * Returned question data at `/question` endpoints
+ */
+export interface QuestionData {
+
+  /**
+   * String value representing a questions title.
+   */
+  title: string;
+
+  /**
+   * String value representing a questions title slug.
+   */
+  title_slug: string;
+
+  /**
+   * String array representing a questions tags.
+   */
+  tags: Array<string>;
+
+  /**
+   * Number value representing a questions id.
+   */
+  id: number;
+
+  /**
+   * Number value representing a questions Leetcode number.
+   */
+  frontend_id: number;
+
+  /**
+   * String value representing a questions difficulty.
+   */
+  difficulty: string;
+
+  /**
+   * Boolean value representing if a questions requires a premium membership to do.
+   */
+  premium: boolean;
+
+  /**
+   * String value representing a questions description.
+   */
+  description: string;
+
+  /**
+   * String array representing hints for a question.
+   */
+  hints: Array<string>;
+
+  /**
+   * Boolean value representing if the authenticated user has completed a question.
+   */
+  completed?: boolean;
+
+  /**
+   * Boolean value representing if the authenticated user has attempted a question.
+   */
+  attempted?: boolean;
+  
+}

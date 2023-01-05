@@ -1,4 +1,4 @@
-import { ExpressQuery, MongooseQuery, Difficulty } from "./interfaces/query";
+import { ExpressQuery, MongooseQuery, Difficulty } from "./types";
 import { iQuestionTag, QuestionTags } from "../models/questionTags";
 import { boolean } from "webidl-conversions";
 
@@ -45,7 +45,7 @@ export class Query {
 
 	private isValidDifficulty(difficulty: string): boolean {
 		const d = difficulty.toLowerCase();
-		const valid = ["1", "2", "3", "easy", "medium", "hard"];
+		const valid = ["easy", "medium", "hard"];
 
 		for (let i = 0; i < valid.length; i++) {
 			if (d === valid[i]) return true;
@@ -55,16 +55,13 @@ export class Query {
 	}
 
 	private getDifficulty(difficulty: string): number {
-		switch (difficulty.toLowerCase()) {
-		case "easy":
-			return 0;
-		case "medium":
-			return 1;
-		case "hard":
-			return 2;
-		}
+		const difficulties: {[key: string]: number} = {
+			"easy": 0,
+			"medium": 1,
+			"hard": 2
+		};
 
-		return parseInt(difficulty) - 1;
+		return difficulties[difficulty];
 	}
 
 	private getPremiumStatus(premium: boolean | undefined): void {

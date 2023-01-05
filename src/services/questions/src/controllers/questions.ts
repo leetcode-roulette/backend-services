@@ -2,8 +2,7 @@ import { Request, Response } from "express";
 import { Query } from "./query";
 import { Questions, iQuestion } from "../models/questions";
 import { UserQuestionStatuses, iUserQuestionStatus } from "../models/userQuestionStatuses";
-import { ExpressQuery, MongooseQuery } from "./interfaces/query";
-import { QuestionData } from "./interfaces/questionData";
+import { ExpressQuery, MongooseQuery, QuestionData } from "./types";
 
 /**
  * `QuestionsController` class for all question related business logic.
@@ -86,13 +85,15 @@ export default class QuestionsController {
 	}
 
 	private static getParsedQuestion(question: iQuestion, questionStatus?: iUserQuestionStatus | null): QuestionData {
+		const difficulties: Array<string> = ["Easy", "Medium", "Hard"];
+
 		const parsedQuestion: QuestionData = {
 			title: question.title,
 			title_slug: question.slug,
 			tags: question.tags,
 			id: question._id,
 			frontend_id: question.frontendId,
-			difficulty: question.difficulty + 1,
+			difficulty: difficulties[question.difficulty],
 			premium: question.isPremium,
 			description: question.content,
 			hints: question.hints,

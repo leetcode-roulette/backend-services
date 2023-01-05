@@ -25,7 +25,7 @@ describe("Tests for `GET /questions`", () => {
 			title: "Two Sum",
 			slug: "two-sum",
 			content: "Two sum description",
-			difficulty: 1,
+			difficulty: 0,
 			tags: ["Array", "Math"],
 			isPremium: false,
 			accepted: 100,
@@ -43,7 +43,7 @@ describe("Tests for `GET /questions`", () => {
 				const q = response.body.questions[0];
 				expect(q.title).toBe(question.title);
 				expect(q.title_slug).toBe(question.slug);
-				expect(q.difficulty).toBe(question.difficulty);
+				expect(q.difficulty).toBe("Easy");
 				expect(q.completed).toBe(false);
 				expect(q.attempted).toBe(false);
 			});
@@ -64,7 +64,7 @@ describe("Tests for `GET /questions`", () => {
 			title: "Two Sum",
 			slug: "two-sum",
 			content: "Two sum description",
-			difficulty: 1,
+			difficulty: 0,
 			tags: ["Array", "Math"],
 			isPremium: false,
 			accepted: 100,
@@ -124,7 +124,7 @@ describe("Tests for `GET /questions/:slug`", () => {
 			title: "Two Sum",
 			slug: "two-sum",
 			content: "Two sum description",
-			difficulty: 1,
+			difficulty: 0,
 			tags: ["Array", "Math"],
 			isPremium: false,
 			accepted: 100,
@@ -139,7 +139,7 @@ describe("Tests for `GET /questions/:slug`", () => {
 				const q = response.body.question;
 				expect(q.title).toBe(question.title);
 				expect(q.title_slug).toBe(question.slug);
-				expect(q.difficulty).toBe(question.difficulty);
+				expect(q.difficulty).toBe("Easy");
 				expect(q.completed).toBe(false);
 				expect(q.attempted).toBe(false);
 			});

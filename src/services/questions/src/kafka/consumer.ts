@@ -18,10 +18,10 @@ class QuestionsConsumer {
 	}
 
 	private async consumeQuestions(): Promise<void> {
-		const consumer: Consumer = await this.kafka.consumer({ groupId: "questions" });
+		const consumer: Consumer = await this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "questions" ],
+			topics: [ "roulette.question.scraped" ],
 			fromBeginning: true
 		});
 
@@ -30,8 +30,6 @@ class QuestionsConsumer {
 				if (!message.value) {
 					return;
 				}
-
-				console.log("Here!");
 
 				const question = JSON.parse(message.value.toString());
 				await Questions.findOneAndUpdate({ _id: question._id }, question, { upsert: true, new: true });
@@ -47,10 +45,10 @@ class QuestionsConsumer {
 	}
 
 	private async consumeQuestionTags(): Promise<void> {
-		const consumer: Consumer = await this.kafka.consumer({ groupId: "questionTags" });
+		const consumer: Consumer = await this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "questionTags" ],
+			topics: [ "roulette.questionTag.scraped" ],
 			fromBeginning: true
 		});
 
@@ -77,10 +75,10 @@ class QuestionsConsumer {
 	}
 
 	private async consumeUserQuestionStatuses(): Promise<void> {
-		const consumer: Consumer = await this.kafka.consumer({ groupId: "userQuestionStatuses" });
+		const consumer: Consumer = await this.kafka.consumer({ groupId: "01" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "userQuestionData" ],
+			topics: [ "roulette.userQuestionStatus.scraped" ],
 			fromBeginning: true
 		});
 
