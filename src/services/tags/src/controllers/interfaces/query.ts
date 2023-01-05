@@ -13,9 +13,4 @@ export interface Query {
    */
   page: number,
 
-  /**
-   * String value indicating how to sort tags
-   */
-  sort: string
-
 }

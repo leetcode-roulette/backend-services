@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { Tags, iTag } from "../models/tags";
+import { QuestionTags, iQuestionTag } from "../models/questionTags";
+import { ParsedTag } from "./interfaces/tags";
 import { Query } from "./interfaces/query";
 
 /**
@@ -18,14 +20,14 @@ export default class TagsController {
 
 		try {
 			const data: Array<iTag> = await Tags.find()
-				.limit(limit)
-				.sort("-" + TagsController.getParsedSortString(req.query.sort));
+				.limit(limit);
+			const questionTags: Array<iQuestionTag> = await QuestionTags.find();
 			const total: number = await Tags.countDocuments();
 			const totalPages: number = Math.ceil(total / limit) || 1;
 
 			return res.status(200).json({
 				message: "Successfully retrieved tags",
-				tags: TagsController.getParsedTagData(data),
+				tags: TagsController.getParsedTagData(data, questionTags),
 				paging: {
 					total,
 					page,
@@ -40,21 +42,29 @@ export default class TagsController {
 		}
 	}
 
-	private static getParsedTagData(tags: Array<iTag>): Array<object> {
+	private static getParsedTagData(tags: Array<iTag>, questionTags: Array<iQuestionTag>): Array<ParsedTag> {
+		const numberOfQuestions = this.getNumberOfQuestions(questionTags);
+
 		return tags.map(tag => ({
 			name: tag.name,
 			slug: tag.slug,
-			number_of_problems: tag.numberOfProblems
-		}));
+			number_of_questions: numberOfQuestions[tag.slug]
+		})).sort((a, b) => a.number_of_questions - b.number_of_questions );
 	}
 
-	private static getParsedSortString(sortString: string): string {
-		const validSortStrings: Set<string> = new Set(["-tagSlug", "-name", "-numberOfProblems"]);
+	private static getNumberOfQuestions(questionTags: Array<iQuestionTag>): {[key: string]: number} {
+		const numberOfQuestions: {[key: string]: number} = {};
 
-		if (validSortStrings.has(sortString) || validSortStrings.has("-" + sortString)) {
-			return sortString;
-		}
+		questionTags.forEach(questionTag => {
+			const slug = questionTag.slug;
 
-		return "-numberOfProblems";
+			if (!(slug in numberOfQuestions)) {
+				numberOfQuestions[slug] = 0;
+			}
+
+			numberOfQuestions[slug]++;
+		});
+
+		return numberOfQuestions;
 	}
 }
