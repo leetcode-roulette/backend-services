@@ -17,7 +17,7 @@ class UserQuestionDataConsumer {
 		const consumer: Consumer = this.kafka.consumer({ groupId: "user-question-data-scraper" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "signin" ],
+			topics: [ "roulette.auth.signin" ],
 			fromBeginning: true
 		});
 		await consumer.run({

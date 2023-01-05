@@ -8,7 +8,6 @@
 		"forceConsistentCasingInFileNames": true,
 		"declarationMap": true,
 		"paths": {
-			"@models/*": ["models/*"],
 			"@controllers/*": ["controllers/*"],
 			"@routes/*": ["routes/*"]
 		},

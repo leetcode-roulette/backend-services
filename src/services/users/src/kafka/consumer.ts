@@ -51,7 +51,7 @@ class UsersConsumer {
 		const consumer: Consumer = await this.kafka.consumer({ groupId: "userQuestionData" });
 		await consumer.connect();
 		await consumer.subscribe({
-			topics: [ "userQuestionData" ],
+			topics: [ "roulette.auth.signin" ],
 			fromBeginning: true
 		});
 
