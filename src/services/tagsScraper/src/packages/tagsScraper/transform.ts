@@ -1,6 +1,11 @@
 import { Question, Tag } from "./types";
 
-export const getTags = (questions: Array<Question>): Array<Tag> => {
+/**
+ * Transforms tag data to useable format.
+ * @param questions - question data to be transformed.
+ * @returns Parsed tags.
+ */
+export const transformTagData = (questions: Array<Question>): Array<Tag> => {
 	const parsedTags: Array<Tag> = [];
 	const tagsSet: Set<string> = new Set();
 

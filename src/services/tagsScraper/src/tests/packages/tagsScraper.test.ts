@@ -1,6 +1,6 @@
 import { scrape } from "@packages/tagsScraper";
-import { getGraphQL } from "@packages/tagsScraper/getGraphQL";
-import { getTags } from "@packages/tagsScraper/getTags";
+import { getGraphQLResponse } from "@packages/tagsScraper/query";
+import { transformTagData } from "@packages/tagsScraper/transform";
 import { Question, Tag } from "@packages/tagsScraper/types";
 
 describe("Tests for `tagsScraper` package", () => {
@@ -10,14 +10,14 @@ describe("Tests for `tagsScraper` package", () => {
 	});
 
 	test("Can make a graphql request to leetcode", async () => {
-		expect(getGraphQL).not.toThrowError();
+		expect(getGraphQLResponse).not.toThrowError();
 	});
 
 	test("Can get an array of tags", () => {
 		const hello: Tag = { name: "Hello", slug: "hello" };
 		const world: Tag = {name: "World", slug: "world"};
 		const questions: Array<Question> = [{ tags: [hello] }, { tags: [hello, world] }, {tags: [world] }];
-		const tags: Array<Tag> = getTags(questions);
+		const tags: Array<Tag> = transformTagData(questions);
 
 		expect(tags).toHaveLength(2);
 		expect(tags).toContain(hello);

@@ -1,6 +1,10 @@
 import axios, { AxiosResponse } from "axios";
 
-export const getGraphQL = async (): Promise<AxiosResponse> => {
+/**
+ * Creates a graphql request to `https://leetcode.com` to retrieve tag data.
+ * @returns Graphql response consisting of tag data.
+ */
+export const getGraphQLResponse = async (): Promise<AxiosResponse> => {
 	const url = "https://leetcode.com/graphql";
 	const query = `query {
 		problemsetQuestionList: questionList(categorySlug: "", filters: {}, limit: 10000) {
