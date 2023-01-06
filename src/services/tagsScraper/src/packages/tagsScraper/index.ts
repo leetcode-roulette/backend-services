@@ -1,3 +1,3 @@
-import { scrape } from "./tagsScraper";
+import { scrape } from "./scraper";
 
 export { scrape };
