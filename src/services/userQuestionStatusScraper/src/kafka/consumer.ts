@@ -1,6 +1,6 @@
 import { Consumer, Kafka, KafkaConfig } from "kafkajs";
 import { logger } from "../logger";
-import scrape from "../packages/userQuestionDataScraper";
+import scrape from "../packages/userQuestionStatusScraper";
 import UserQuestionDataProducer from "./producer";
 
 class UserQuestionDataConsumer {

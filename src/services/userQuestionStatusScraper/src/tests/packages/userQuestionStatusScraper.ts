@@ -1,4 +1,4 @@
-import scrape from "@packages/userQuestionDataScraper";
+import scrape from "@packages/userQuestionStatusScraper";
 
 describe("Tests for `userQuestionDataScraper` package", () => {
 	test("Can ping the `leetcode.com/graphql` endpoint with the questions query", async () => {

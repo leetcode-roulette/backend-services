@@ -1,5 +1,5 @@
 {
-  "name": "user-question-data-scraper",
+  "name": "user-question-status-scraper",
   "version": "0.0.1",
   "description": "Leetcode Roulette service to get a users question completion statuses.",
   "main": "src/index.ts",
