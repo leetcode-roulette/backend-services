@@ -1,11 +1,26 @@
+/**
+ * User interface for the currently authenticated Roulette user.
+ */
 export type User = {
-  username: string,
-  id: number,
-  isPremium: boolean,
-  avatar: string
-}
 
-export type Session = {
-  userId: number,
-  username: string
+  /**
+   * Currently authenticated users username.
+   */
+  username: string;
+
+  /**
+   * Currently authenticated users id.
+   */
+  id: number;
+
+  /**
+   * Currently authenticated users leetcode premium status.
+   */
+  isPremium: boolean;
+
+  /**
+   * Currently authenticated users avatar url.
+   */
+  avatar: string;
+  
 }

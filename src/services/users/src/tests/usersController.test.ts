@@ -1,6 +1,5 @@
 import Users, { iUser } from "@models/users";
 import express from "express";
-import session from "express-session";
 import { app } from "app";
 import mongoose from "mongoose";
 import supertest from "supertest";
@@ -18,7 +17,6 @@ afterEach((done) => {
 describe("Tests for `UsersController` related routes", () => {
 	test("Can get the currently authenticated user", async () => {
 		const mockApp = express();
-		mockApp.use(session({ secret: "test", resave: true, saveUninitialized: true }));
 		mockApp.all("*", function(req, res, next) {
 			req.cookies = { userId: 1 };
 			next();
@@ -42,8 +40,7 @@ describe("Tests for `UsersController` related routes", () => {
 				expect(data.username).toBe(user.username);
 				expect(data.avatar).toBe(user.avatar);
 				expect(data.is_premium).toBe(user.isPremium);
-				expect(data.accepted).toBe(0);
-				expect(Array.isArray(data.question_statuses)).toBe(true);
+				expect(data.solved).toStrictEqual({"easy": 0, "medium": 0, "hard": 0, "total": 0});
 			});
 	});
 
@@ -70,8 +67,7 @@ describe("Tests for `UsersController` related routes", () => {
 				expect(data.username).toBe(user.username);
 				expect(data.avatar).toBe(user.avatar);
 				expect(data.is_premium).toBe(user.isPremium);
-				expect(data.accepted).toBe(0);
-				expect(Array.isArray(data.question_statuses)).toBe(true);
+				expect(data.solved).toStrictEqual({"easy": 0, "medium": 0, "hard": 0, "total": 0});
 			});
 	});
 

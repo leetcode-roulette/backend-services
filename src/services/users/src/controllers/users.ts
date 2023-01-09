@@ -2,6 +2,7 @@ import Users, { iUser } from "../models/users";
 import { Request, Response } from "express";
 import UserQuestionData, { iUserQuestionData } from "../models/userQuestionData";
 import { User } from "../types/custom";
+import { ParsedUserData } from "./types";
 
 /**
  * `UsersController` class for all user related business logic.
@@ -19,7 +20,7 @@ export default class UsersController {
 
 			return res.status(200).json({
 				message: "Successfully retrieved authenticated user",
-				...data
+				user: data
 			});
 		} catch(e) {
 			return res.status(500).json({
@@ -42,7 +43,7 @@ export default class UsersController {
 
 			return res.status(200).json({
 				message: "Successfully fetched user with username " + username,
-				...data
+				user: data
 			});
 		} catch(e) {
 			return res.status(500).json({
@@ -52,7 +53,7 @@ export default class UsersController {
 		}
 	}
 
-	private static async getParsedUserData(user?: iUser | null | User) {
+	private static async getParsedUserData(user?: iUser | null | User): Promise<ParsedUserData> {
 		if (!user) {
 			throw new Error("No user found with provided id");
 		}
@@ -70,24 +71,14 @@ export default class UsersController {
 		});
 
 		return ({
-			message: "Successfully fetched user with username " + username,
-			user: {
-				username,
-				avatar: user.avatar,
-				is_premium: user.isPremium,
-				accepted: {
-					total,
-					easy: completed[0],
-					medium: completed[1],
-					hard: completed[2]
-				},
-				question_statuses: userQuestionData.map(question => ({
-					id: question.questionId,
-					title: question.questionTitle,
-					difficulty: question.questionDifficulty,
-					isCompleted: question.isCompleted,
-					hasBeenAttempted: question.hasBeenAttempted
-				}))
+			username,
+			avatar: user.avatar,
+			is_premium: user.isPremium,
+			solved: {
+				total,
+				easy: completed[0],
+				medium: completed[1],
+				hard: completed[2]
 			}
 		});
 	}
