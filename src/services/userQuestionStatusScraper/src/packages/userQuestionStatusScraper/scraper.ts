@@ -8,10 +8,10 @@ export const scrape = async (session: string): Promise<ParsedData> => {
 			questions: data {
 				status
 				difficulty
-				title: questionTitle
-				slug: questionTitleSlug
-				id: questionId
-				frontendId: questionFrontendId
+				questionTitle
+				questionTitleSlug
+				questionId
+				questionFrontendId
 			}
 		}
 	}`;
