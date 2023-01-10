@@ -16,7 +16,7 @@ class UsersConsumer {
 	}
 
 	private async consumeUsers(): Promise<void> {
-		const consumer: Consumer = await this.kafka.consumer({ groupId: "01" });
+		const consumer: Consumer = await this.kafka.consumer({ groupId: "07" });
 		await consumer.connect();
 		await consumer.subscribe({
 			topics: [ "roulette.user.scraped" ],
@@ -48,7 +48,7 @@ class UsersConsumer {
 	}
 
 	private async consumeUserQuestionData(): Promise<void> {
-		const consumer: Consumer = await this.kafka.consumer({ groupId: "02" });
+		const consumer: Consumer = await this.kafka.consumer({ groupId: "08" });
 		await consumer.connect();
 		await consumer.subscribe({
 			topics: [ "roulette.user-question-status.scraped" ],
@@ -61,10 +61,10 @@ class UsersConsumer {
 					return;
 				}
 
-				const { username, questionTitle, difficulty, isCompleted, hasBeenAttempted } = JSON.parse(message.value.toString());
-				await UserQuestionData.findOneAndUpdate({ username, questionTitle }, {
+				const { username, title, difficulty, isCompleted, hasBeenAttempted } = JSON.parse(message.value.toString());
+				await UserQuestionData.findOneAndUpdate({ username, questionTitle: title }, {
 					username,
-					questionTitle,
+					questionTitle: title,
 					questionDifficulty: difficulty,
 					isCompleted,
 					hasBeenAttempted
