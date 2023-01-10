@@ -1,3 +1,3 @@
-import scrape from "./userQuestionStatusScraper";
+import { scrape } from "./scraper";
 
 export default scrape;
