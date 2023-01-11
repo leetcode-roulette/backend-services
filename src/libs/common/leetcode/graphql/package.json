@@ -1,0 +1,21 @@
+{
+  "name": "leetcode-graphql",
+  "version": "0.0.1",
+  "description": "Library for making graphql requests to https://leetcode.com.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --passWithNoTests"
+  },
+  "keywords": [
+    "Leetcode",
+    "GraphQL"
+  ],
+  "author": "Eric Hicks",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.2.2"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0"
+  }
+}
