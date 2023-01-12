@@ -1,0 +1,14 @@
+{
+  "name": "kafka-consumer",
+  "version": "0.0.1",
+  "description": "Kafka consumer library to automate kafka setup.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --passWithNoTests"
+  },
+  "author": "Eric Hicks",
+  "license": "MIT",
+  "dependencies": {
+    "kafkajs": "^2.2.3"
+  }
+}
